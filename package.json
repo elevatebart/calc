@@ -17,6 +17,8 @@
   "devDependencies": {
     "@cypress/eslint-plugin-dev": "^5.0.2",
     "@cypress/vue": "file:../../github/cypress/npm/vue",
+    "@types/cypress": "^1.1.3",
+    "@types/mocha": "^8.2.0",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "@typescript-eslint/parser": "^2.33.0",
     "@vue/cli-plugin-babel": "~4.5.0",
