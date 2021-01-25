@@ -5,8 +5,9 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "test:e2e": "vue-cli-service test:e2e",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "cy:open": "node ../../github/cypress/scripts/cypress.js open-ct --project ${PWD}",
+    "cy:run": "node ../../github/cypress/scripts/cypress.js open-ct --run-project ${PWD}"
   },
   "dependencies": {
     "core-js": "^3.6.5",
@@ -14,11 +15,11 @@
     "vuex": "^4.0.0-0"
   },
   "devDependencies": {
+    "@cypress/eslint-plugin-dev": "^5.0.2",
+    "@cypress/vue": "file:../../github/cypress/npm/vue",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "@typescript-eslint/parser": "^2.33.0",
     "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-e2e-cypress": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-plugin-typescript": "~4.5.0",
     "@vue/cli-plugin-vuex": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
