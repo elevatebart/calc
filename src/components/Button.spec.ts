@@ -1,4 +1,4 @@
-import { mount } from "@cypress/vue";
+import mount from "../../scripts/mount";
 import CalcButton from "./Button.vue";
 
 describe("<CalcButton />", () => {
