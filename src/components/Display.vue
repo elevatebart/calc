@@ -16,9 +16,9 @@ div {
   text-align: right;
   padding: 15px 20px;
   color: #fff;
-  font-size: 2em;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  font-weight: 200;
+  font-size: 3em;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Open Sans",
+    "Helvetica Neue", sans-serif;
+  font-weight: 300;
 }
 </style>
