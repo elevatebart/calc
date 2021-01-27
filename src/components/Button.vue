@@ -6,7 +6,7 @@ export default defineComponent({
     variant: {
       type: String,
       default: null,
-      validator: (val: string) => ["operator", "dark"].includes(val),
+      validator: (val: string) => ["wide", "operator", "dark"].includes(val),
     },
   },
 });
@@ -38,5 +38,9 @@ button {
 
 .dark {
   background: #242424;
+}
+
+.wide {
+  width: 140px;
 }
 </style>
