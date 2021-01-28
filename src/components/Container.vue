@@ -5,20 +5,40 @@ export default defineComponent({});
 </script>
 
 <template>
-  <div>
+  <div class="wrapper">
+    <div class="header">
+      <span class="close"></span>
+      <span class="minimize"></span>
+      <span class="fullscreen"></span>
+    </div>
     <slot />
   </div>
 </template>
 
 <style scoped>
-div {
+div.wrapper {
   background: #333;
-  text-align: right;
-  padding: 15px 20px;
   color: #fff;
-  font-size: 3em;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Open Sans",
-    "Helvetica Neue", sans-serif;
-  font-weight: 300;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.close,
+.minimize,
+.fullscreen {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  margin: 5px;
+}
+.close {
+  background: red;
+}
+.minimize {
+  background: yellow;
+}
+.fullscreen {
+  background: green;
 }
 </style>

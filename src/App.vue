@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <CalcContainer class="container">
     <CalcDisplay>
       {{ result }}
     </CalcDisplay>
@@ -24,17 +24,19 @@
         <CalcButton variant="wide">0</CalcButton>
       </div>
     </div>
-  </div>
+  </CalcContainer>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
+import CalcContainer from "./components/Container.vue";
 import CalcDisplay from "./components/Display.vue";
 import CalcButton from "./components/Button.vue";
 
 export default defineComponent({
   name: "App",
   components: {
+    CalcContainer,
     CalcDisplay,
     CalcButton,
   },
