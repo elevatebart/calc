@@ -28,7 +28,7 @@ describe("<CalcButton />", () => {
   });
 
   it("should emit a click when clicking on the button", () => {
-    const stub = cy.stub();
+    const stub = cy.stub().as("onClick");
     // @ts-ignore JSX is being mean for a reason I ignore
     mount(() => <CalcButton onClick={stub}>8</CalcButton>).then(() =>
       cy
