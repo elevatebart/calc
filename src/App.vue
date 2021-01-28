@@ -90,6 +90,7 @@ export default defineComponent({
 
     function handleEqual() {
       firstOperand = calculate();
+      operator = "";
       result.value = firstOperand.toString();
     }
 
