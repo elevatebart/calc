@@ -5,7 +5,7 @@ export default defineComponent({});
 </script>
 
 <template>
-  <div>
+  <div data-cy="display">
     <slot />
   </div>
 </template>

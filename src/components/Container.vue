@@ -19,8 +19,10 @@ export default defineComponent({});
 div.wrapper {
   background: #333;
   color: #fff;
-  padding: 10px;
+  border: 1px solid #333;
+  overflow: hidden;
   border-radius: 10px;
+  border-left: 0;
 }
 
 .close,

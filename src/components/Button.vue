@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 
 export default defineComponent({
   emits: ["click"],
@@ -9,13 +9,17 @@ export default defineComponent({
       default: null,
       validator: (val: string) => ["wide", "operator", "dark"].includes(val),
     },
+    value: {
+      type: String,
+      required: true,
+    },
   },
 });
 </script>
 
 <template>
-  <button @click="$emit('click')" :class="variant">
-    <slot />
+  <button @click="$emit('click', value)" :class="variant" :data-cy="value">
+    {{ value }}
   </button>
 </template>
 
@@ -23,14 +27,20 @@ export default defineComponent({
 button {
   width: 70px;
   height: 50px;
-  background: #5d5e5e;
+  background: #7f8080;
   color: #fff;
   font-size: 1.5em;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-weight: 300;
   -webkit-appearance: none;
-  border: 1px solid #333;
+  border: 0;
+  border-left: 1px solid #333;
+  border-top: 1px solid #333;
+}
+
+button:focus {
+  outline: 0;
 }
 
 .operator {
@@ -38,7 +48,7 @@ button {
 }
 
 .dark {
-  background: #242424;
+  background: #585656;
 }
 
 .wide {
