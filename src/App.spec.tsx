@@ -6,52 +6,56 @@ describe("<App />", () => {
     mount(() => <App />);
   });
 
+  function type(str: string){
+    const characters = str.split('')
+    characters.forEach(s => cy.get(`[data-cy='${s}']`).click())
+  }
+
+  function display(){
+    return cy.get("[data-cy='display']")
+  }
+
   it("Sets a number when typing 10", () => {
     mount(() => <App />);
-    cy.get("[data-cy='1']").click()
-    cy.get("[data-cy='0']").click()
-    cy.get("[data-cy='display']").should('contain', '10')
+    type("10")
+    display().should('contain', '10')
   });
 
   it("Sets a number when typing it", () => {
     mount(() => <App />);
-    cy.get("[data-cy='3']").click()
-    cy.get("[data-cy='5']").click()
-    cy.get("[data-cy='display']").should('contain', '35')
+    type("35")
+    display().should('contain', '35')
   });
 
   it("Adds two numbers when typing them with a + in the middle", () => {
     mount(() => <App />);
-    cy.get("[data-cy='3']").click()
-    cy.get("[data-cy='5']").click()
-    cy.get("[data-cy='+']").click()
-    cy.get("[data-cy='8']").click()
-    cy.get("[data-cy='display']").should('not.contain', '35')
-    cy.get("[data-cy='=']").click()
-    cy.get("[data-cy='display']").should('contain', '43')
+    type("35+8=")
+    display().should('contain', '43')
   });
 
-  it("Substract two numbers when typing them with a + in the middle", () => {
+  it("Substract two numbers when typing them with a - in the middle", () => {
     mount(() => <App />);
-    cy.get("[data-cy='3']").click()
-    cy.get("[data-cy='5']").click()
-    cy.get("[data-cy='-']").click()
-    cy.get("[data-cy='8']").click()
-    cy.get("[data-cy='=']").click()
-    cy.get("[data-cy='display']").should('contain', '27')
+    type("35-8=")
+    display().should('contain', '27')
   });
 
-  it("Substract two numbers when typing them with a + in the middle", () => {
+  it("Chain additions", () => {
     mount(() => <App />);
-    cy.get("[data-cy='3']").click()
-    cy.get("[data-cy='5']").click()
-    cy.get("[data-cy='+']").click()
-    cy.get("[data-cy='8']").click()
-    cy.get("[data-cy='+']").click()
-    cy.get("[data-cy='1']").click()
-    cy.get("[data-cy='0']").click()
-    cy.get("[data-cy='display']").should('contain', '10')
-    cy.get("[data-cy='=']").click()
-    cy.get("[data-cy='display']").should('contain', '53')
+    type("35+8")
+    display().should('contain', '8')
+    type("+10")
+    display().should('contain', '10')
+    type("=")
+    display().should('contain', '53')
+  });
+
+  it("Keep value for the next operation", () => {
+    mount(() => <App />);
+    type("35+8")
+    display().should('contain', '8')
+    type("=")
+    display().should('contain', '43')
+    type("+10=")
+    display().should('contain', '53')
   });
 });
