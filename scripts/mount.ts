@@ -5,11 +5,12 @@ import { mount as VTUmount } from "@vue/test-utils/dist/vue-test-utils.esm-bundl
 
 export default function mount(
   comp: any,
-  options: Omit<MountingOptions<any>, "attachTo"> & { log?: boolean }
+  options: Omit<MountingOptions<any>, "attachTo"> & { log?: boolean } = {}
 ) {
   const componentName =
     comp.name ??
     (() => {
+      if (!comp.__file) return "--Component--";
       const a = comp.__file.split("/");
       return a[a.length - 1].replace(/.\w+$/, "");
     })();
@@ -37,9 +38,7 @@ export default function mount(
           logInstance.end();
         }
 
-        // by returning undefined we keep the previous subject
-        // which is the mounted component
-        return undefined;
+        return wrapper;
       });
   });
 }

@@ -19,4 +19,24 @@ describe("<CalcButton />", () => {
       props: { variant: "dark" },
     });
   });
+
+  it("should be wider when wide variant", () => {
+    mount(CalcButton, {
+      slots: { default: "0" },
+      props: { variant: "wide" },
+    });
+  });
+
+  it("should emit a click when clicking on the button", () => {
+    const stub = cy.stub();
+    // @ts-ignore JSX is being mean for a reason I ignore
+    mount(() => <CalcButton onClick={stub}>8</CalcButton>).then(() =>
+      cy
+        .get("button")
+        .click()
+        .then(() => {
+          expect(stub).to.have.been.called;
+        })
+    );
+  });
 });
