@@ -19,6 +19,6 @@ div {
   font-size: 3em;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Open Sans",
     "Helvetica Neue", sans-serif;
-  font-weight: 300;
+  font-weight: 200;
 }
 </style>

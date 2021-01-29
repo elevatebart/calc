@@ -5,7 +5,7 @@
       <div class="misc">
         <CalcButton variant="dark" value="AC" @click="reset" />
         <CalcButton variant="dark" value="+/-" @click="handleNegative" />
-        <CalcButton variant="dark" value="%" />
+        <CalcButton variant="dark" value="%" @click="handlePercent" />
       </div>
       <div class="operators">
         <CalcButton variant="operator" value="÷" @click="handleOperator" />
@@ -21,7 +21,7 @@
           @click="handleNumber"
           :value="i.toString()"
         />
-        <CalcButton value="." />
+        <CalcButton value="." @click="handleNumber" />
         <CalcButton variant="wide" value="0" @click="handleNumber" />
       </div>
     </div>
@@ -52,7 +52,7 @@ export default defineComponent({
     function getCurrentNumber(): number {
       const sign = negative.value ? -1 : 1;
       negative.value = false;
-      return sign * parseInt(currentNumber, 10);
+      return sign * parseFloat(currentNumber);
     }
 
     function calculate(): number {
@@ -70,8 +70,16 @@ export default defineComponent({
       }
     }
 
-    function handleNumber(digit: number) {
-      currentNumber += digit.toString();
+    function handleNumber(digit: string) {
+      if (!currentNumber.length) {
+        if (digit === ".") {
+          currentNumber = "0";
+        }
+        if (digit === "0") {
+          return;
+        }
+      }
+      currentNumber += digit;
       result.value = currentNumber;
     }
 
@@ -97,6 +105,23 @@ export default defineComponent({
       result.value = firstOperand.toString();
     }
 
+    function trimZeroes(num: string): string {
+      if (/\./.test(num)) {
+        num = num.replace(/0+$/, "");
+      }
+      num = num.replace(/^0+/, "0");
+      return num;
+    }
+
+    function handlePercent() {
+      currentNumber = "00" + currentNumber;
+      currentNumber = trimZeroes(
+        currentNumber.slice(0, -2) + "." + currentNumber.slice(-2)
+      );
+
+      result.value = currentNumber;
+    }
+
     function reset() {
       currentNumber = "";
       operator = "";
@@ -114,7 +139,7 @@ export default defineComponent({
       handleNegative,
       reset,
       negative,
-      firstOperand,
+      handlePercent,
     };
   },
 });
