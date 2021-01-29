@@ -1,12 +1,10 @@
 <template>
   <CalcContainer class="container">
-    <CalcDisplay>
-      {{ result }}
-    </CalcDisplay>
+    <CalcDisplay> {{ negative ? "-" : "" }}{{ result }} </CalcDisplay>
     <div class="keyboard">
       <div class="misc">
-        <CalcButton variant="dark" value="AC" />
-        <CalcButton variant="dark" value="+/-" />
+        <CalcButton variant="dark" value="AC" @click="reset" />
+        <CalcButton variant="dark" value="+/-" @click="handleNegative" />
         <CalcButton variant="dark" value="%" />
       </div>
       <div class="operators">
@@ -45,36 +43,30 @@ export default defineComponent({
   },
   setup() {
     const result = ref("0");
+    const negative = ref(false);
     const numbers = [9, 8, 7, 6, 5, 4, 3, 2, 1];
     let currentNumber = "";
     let operator = "";
     let firstOperand = 0;
 
-    let firstNumberAfterOperator = false;
-
     function calculate(): number {
+      const sign = negative.value ? -1 : 1;
+      negative.value = false;
       switch (operator) {
         case "+":
-          return firstOperand + parseInt(currentNumber, 10);
+          return firstOperand + sign * parseInt(currentNumber, 10);
         case "-":
-          return firstOperand - parseInt(currentNumber, 10);
+          return firstOperand - sign * parseInt(currentNumber, 10);
         case "x":
-          return firstOperand * parseInt(currentNumber, 10);
+          return firstOperand * (sign * parseInt(currentNumber, 10));
         case "÷":
-          return firstOperand / parseInt(currentNumber, 10);
+          return firstOperand / (sign * parseInt(currentNumber, 10));
         default:
           return 0;
       }
     }
 
     function handleNumber(digit: number) {
-      if (firstNumberAfterOperator) {
-        if (!firstOperand) {
-          firstOperand = parseInt(currentNumber, 10);
-        }
-        currentNumber = "";
-        firstNumberAfterOperator = false;
-      }
       currentNumber += digit.toString();
       result.value = currentNumber;
     }
@@ -84,8 +76,15 @@ export default defineComponent({
       if (operator.length) {
         firstOperand = calculate();
       }
-      firstNumberAfterOperator = true;
+      if (!firstOperand) {
+        firstOperand = parseInt(currentNumber, 10);
+      }
+      currentNumber = "";
       operator = _operator;
+    }
+
+    function handleNegative() {
+      negative.value = !negative.value;
     }
 
     function handleEqual() {
@@ -94,12 +93,23 @@ export default defineComponent({
       result.value = firstOperand.toString();
     }
 
+    function reset() {
+      currentNumber = "";
+      operator = "";
+      firstOperand = 0;
+      negative.value = false;
+      handleEqual();
+    }
+
     return {
       result,
       numbers,
       handleNumber,
       handleEqual,
       handleOperator,
+      handleNegative,
+      reset,
+      negative,
     };
   },
 });
