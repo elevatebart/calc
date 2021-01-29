@@ -49,7 +49,7 @@ export default defineComponent({
     let operator = "";
     let firstOperand = 0;
 
-    function getCurrentNumber(): number {
+    function evalCurrentNumber(): number {
       const sign = negative.value ? -1 : 1;
       negative.value = false;
       return sign * parseFloat(currentNumber);
@@ -58,13 +58,13 @@ export default defineComponent({
     function calculate(): number {
       switch (operator) {
         case "+":
-          return firstOperand + getCurrentNumber();
+          return firstOperand + evalCurrentNumber();
         case "-":
-          return firstOperand - getCurrentNumber();
+          return firstOperand - evalCurrentNumber();
         case "x":
-          return firstOperand * getCurrentNumber();
+          return firstOperand * evalCurrentNumber();
         case "÷":
-          return firstOperand / getCurrentNumber();
+          return firstOperand / evalCurrentNumber();
         default:
           return 0;
       }
@@ -89,7 +89,7 @@ export default defineComponent({
         firstOperand = calculate();
       }
       if (!firstOperand) {
-        firstOperand = getCurrentNumber();
+        firstOperand = evalCurrentNumber();
       }
       currentNumber = "";
       operator = _operator;
