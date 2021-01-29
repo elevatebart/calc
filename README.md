@@ -1,29 +1,16 @@
-# calc
+# a MacOS calculator in Vue 3 for testing cypress CT
 
-## Project setup
-```
-yarn install
-```
+This is meant as an experiment and not supposed to be used as is yet
+## Launch the App
 
-### Compiles and hot-reloads for development
 ```
 yarn serve
 ```
 
-### Compiles and minifies for production
-```
-yarn build
-```
+## launch **cypress component testing** 
 
-### Run your end-to-end tests
-```
-yarn test:e2e
-```
+Install using `yarn install`
 
-### Lints and fixes files
-```
-yarn lint
-```
+Make sure you have checked out cypress component testing
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Then open cypress using `yarn cy:open` and `yarn cy:run`
