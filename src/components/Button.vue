@@ -18,7 +18,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <button @click="$emit('click', value)" :class="variant" :data-cy="value">
+  <button @click="$emit('click', value)" :class="variant">
     {{ value }}
   </button>
 </template>

@@ -100,6 +100,9 @@ export default defineComponent({
     }
 
     function handleEqual() {
+      if (!operator.length) {
+        return;
+      }
       firstOperand = calculate();
       operator = "";
       result.value = firstOperand.toString();
@@ -127,6 +130,7 @@ export default defineComponent({
       operator = "";
       firstOperand = 0;
       negative.value = false;
+      result.value = firstOperand.toString();
       handleEqual();
     }
 

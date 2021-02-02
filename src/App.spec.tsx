@@ -9,12 +9,17 @@ describe("<App />", () => {
 
   function type(str: string){
     const characters = str.split('')
-    characters.forEach(s => cy.get(`[data-cy='${s}']`).click())
+    characters.forEach(s => cy.findByRole('button', {name: s}).click())
   }
 
   it("Sets a number when typing 10", () => {
     type("10")
     cy.get("@display").should('contain', '10')
+  });
+
+  it("Sets a number when typing 28 and =", () => {
+    type("28=")
+    cy.get("@display").should('contain', '28')
   });
 
   it("ignores trainling 0 ", () => {
@@ -57,27 +62,27 @@ describe("<App />", () => {
 
   it("Reset everything when clicking on AC", () => {
     type("35-8=")
-    cy.get(`[data-cy='AC']`).click()
+    cy.findByRole('button', {name: 'AC'}).click()
     cy.get("@display").should('contain', '0')
   });
 
   describe("negative", () => {
     it('displays a minus sign', () => {
       type("135")
-      cy.get(`[data-cy='+/-']`).click()
+      cy.findByRole('button', {name: '+/-'}).click()
       cy.get("@display").should('contain', '-135')
     })
 
     it('adds signed numbers', () => {
       type("135")
-      cy.get(`[data-cy='+/-']`).click()
+      cy.findByRole('button', {name: '+/-'}).click()
       type("+10=")
       cy.get("@display").should('contain', '-125')
     })
 
     it('adds signed numbers and chain on', () => {
       type("135")
-      cy.get(`[data-cy='+/-']`).click()
+      cy.findByRole('button', {name: '+/-'}).click()
       type("+10")
       cy.get("@display").should('contain', '10')
       type("+15")
