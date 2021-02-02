@@ -35,12 +35,12 @@ div.wrapper {
   margin: 5px;
 }
 .close {
-  background: red;
+  background: #ed695f;
 }
 .minimize {
-  background: yellow;
+  background: #f6bd4f;
 }
 .fullscreen {
-  background: green;
+  background: #61c454;
 }
 </style>
