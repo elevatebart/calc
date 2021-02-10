@@ -3,17 +3,26 @@ import { MountingOptions } from "@vue/test-utils";
 // @ts-ignore
 import { mount as VTUmount } from "@vue/test-utils/dist/vue-test-utils.esm-bundler";
 
+const DEFAULT_COMP_NAME = "-Unknown-";
+
 export default function mount(
   comp: any,
   options: Omit<MountingOptions<any>, "attachTo"> & { log?: boolean } = {}
 ) {
+  let componentForNaming = comp;
+  if (typeof comp === "function") {
+    componentForNaming = comp();
+  } else {
+    componentForNaming = comp;
+  }
   const componentName =
-    comp.name ??
+    componentForNaming.name ??
     (() => {
-      if (!comp.__file) return "--Component--";
-      const a = comp.__file.split("/");
-      return a[a.length - 1].replace(/.\w+$/, "");
+      if (!componentForNaming.type?.__file) return DEFAULT_COMP_NAME;
+      const compFileFullPath = componentForNaming.type.__file.split("/");
+      return compFileFullPath[compFileFullPath.length - 1].replace(/.\w+$/, "");
     })();
+
   const message = `<${componentName} ... />`;
   let logInstance: Cypress.Log;
 
@@ -21,7 +30,7 @@ export default function mount(
     if (options.log !== false) {
       logInstance = Cypress.log({
         name: "mount",
-        message: [message],
+        message: [message]
       });
     }
     $("body").html("");
