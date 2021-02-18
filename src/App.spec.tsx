@@ -1,4 +1,4 @@
-import mount from "../scripts/mount";
+import { mount } from "@cypress/vue";
 import App from "./App.vue";
 
 describe("<App />", () => {

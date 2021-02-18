@@ -1,11 +1,11 @@
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent } from "vue";
 
 export default defineComponent({
   emits: ["click"],
   props: {
     variant: {
-      type: String,
+      type: String as () => "wide" | "operator" | "dark",
       default: null,
       validator: (val: string) => ["wide", "operator", "dark"].includes(val),
     },

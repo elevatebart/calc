@@ -1,4 +1,4 @@
-import mount from "../../scripts/mount";
+import { mount } from "@cypress/vue";
 import CalcButton from "./Button.vue";
 
 describe("<CalcButton />", () => {
@@ -15,7 +15,17 @@ describe("<CalcButton />", () => {
   });
 
   it("should be wider when wide variant", () => {
-    mount(() => <CalcButton variant="wide" value="0" />);
+    mount(CalcButton, {
+      props:{
+        value: "0",
+        variant: "wide"
+      },
+      data(){
+        return{
+          test: 7
+        }
+      }
+    });
   });
 
   it("should emit a click when clicking on the button", () => {
