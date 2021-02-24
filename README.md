@@ -1,6 +1,7 @@
-# a MacOS calculator in Vue 3 for testing cypress CT
+# MacOS calc clone tested with Cypresss Component Testing
 
-This is meant as an experiment and not supposed to be used as is yet
+It is wrtten in Vue 3 from the vue cli
+
 ## Launch the App
 
 ```
