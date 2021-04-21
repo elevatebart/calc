@@ -1,4 +1,5 @@
 {
   "componentFolder": "src",
+  "fixturesFolder": false,
   "testFiles": "**/*.spec.{ts,tsx}"
 }

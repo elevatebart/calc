@@ -7,8 +7,13 @@
 // https://docs.cypress.io/api/plugins/preprocessors-api.html#Examples
 
 const webpackConfig = require("@vue/cli-service/webpack.config.js");
+const { startDevServer } = require('@cypress/webpack-dev-server')
 
+/**
+ * @type Cypress.PluginConfig
+ */
 module.exports = (on, config) => {
-  require("@cypress/vue/dist/plugins/webpack")(on, config, webpackConfig)
-  return config;
-};
+  on('dev-server:start', (options) => startDevServer({ options, webpackConfig }))
+
+  return config
+}
