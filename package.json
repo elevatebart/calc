@@ -16,8 +16,8 @@
   },
   "devDependencies": {
     "@cypress/eslint-plugin-dev": "^5.1.0",
-    "@cypress/webpack-dev-server": "^1.4.0",
     "@cypress/vue": "^3.0.1",
+    "@cypress/webpack-dev-server": "^1.4.0",
     "@testing-library/cypress": "^7.0.3",
     "@types/mocha": "^8.2.0",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
